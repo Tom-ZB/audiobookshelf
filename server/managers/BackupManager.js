@@ -103,6 +103,7 @@ class BackupManager {
     }
 
     const tempPath = Path.join(this.backupPath, fileUtils.sanitizeFilename(backupFile.name))
+    console.log(tempPath)
     const success = await backupFile
       .mv(tempPath)
       .then(() => true)

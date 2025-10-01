@@ -1,0 +1,83 @@
+WEBVTT
+
+00:00.000 --> 00:07.000
+themselves are very important, one is the region and other is that availability so, right.
+
+00:07.000 --> 00:16.000
+Regions that, okay I will show you guys the thing as well, but regions means that there
+
+00:16.000 --> 00:28.000
+are geographical dispersed locations where AWS, AWS, SS, their data centrally, right.
+
+00:28.000 --> 00:35.000
+So, apparently there are 37 regions to operate, right.
+
+00:35.000 --> 00:42.000
+Then what happened that for each region, for example I will say this is the map of the world, right.
+
+00:42.000 --> 00:52.000
+And this map shows that there are 37 regions, for example this one I showed you, now I will just
+
+00:52.000 --> 00:59.000
+tell you about it. So, there are 37 regions. So, for each region, for each region which
+
+00:59.000 --> 01:09.000
+is geographically dispersed, there are, this is one region. So, for one region, there are
+
+01:09.000 --> 01:26.000
+minimum three availability maps, right. So, for each region, there are the various regions
+
+01:26.000 --> 01:32.000
+known as these, the various regions have the data sellers and these ways these are interacting
+
+01:32.000 --> 01:37.000
+with each other, right. So, what is happening there are part of it means to some kind of
+
+01:37.000 --> 01:42.000
+disaster happen, they can migrate their resources and you must know things, other available
+
+01:42.000 --> 01:50.000
+regions, these are within their region. Right. So, in high availability, if you are in this
+
+01:50.000 --> 01:56.000
+region and you can use this availability one, maybe you can, if you are making a delay,
+
+01:56.000 --> 02:01.000
+you can change your availability as well, as well with this region. Right. So, these are
+
+02:01.000 --> 02:17.000
+just regions, I have just the data sellers. So, each region has minimum of three availability,
+
+02:17.000 --> 02:28.000
+right. Then comes the local zone, as I was discussing with you about this CDN that there
+
+02:28.000 --> 02:34.000
+should be some kind of thing as you see, right. So, what is happening that there in some
+
+02:34.000 --> 02:43.000
+quality local zone, these same concept here, concept of the delay, to make you get that
+
+02:43.000 --> 02:49.000
+delay, what is happening the regions have the local zones and these local zones are closer
+
+02:49.000 --> 02:56.000
+to the users and they can get their data without any delay. So, the data cash it here and
+
+02:56.000 --> 03:03.000
+then the users can access these resources, right. So, if you are looking to this type,
+
+03:03.000 --> 03:10.000
+there are these are these regions available for the world, right. And for over application
+
+03:10.000 --> 03:17.000
+for this type of piece, they show that you have to use this, not original, right, because
+
+03:17.000 --> 03:24.000
+it is not very expensive. Please, they show that this often for the city, don't use that,
+
+03:24.000 --> 03:31.000
+because if you are using a city, you will have to get more charges, okay.
+
+03:31.000 --> 03:35.000
+So, it is fine, I will show you.
+

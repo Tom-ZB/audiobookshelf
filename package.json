@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch server index.js -- --dev",
+    "dev1": "node --inspect-brk index.js --dev ",
     "start": "node index.js",
     "start-dev": "node index.js --prod-with-dev-env",
     "client": "cd client && npm ci && npm run generate",
@@ -39,12 +40,14 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-rate-limit": "^7.5.1",
     "express-session": "^1.17.3",
     "graceful-fs": "^4.2.10",
     "htmlparser2": "^8.0.1",
     "lru-cache": "^10.0.3",
+    "multer": "^2.0.2",
     "node-unrar-js": "^2.0.2",
     "nodemailer": "^6.9.13",
     "openid-client": "^5.6.1",

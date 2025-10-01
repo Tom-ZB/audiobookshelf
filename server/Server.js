@@ -1,12 +1,24 @@
 const Path = require('path')
-const Sequelize = require('sequelize')
 const express = require('express')
+const cors = require('cors');
+const app = express();
+
+app.use(cors());
+2
+app.use('/staticServer', express.static(Path.join(__dirname, 'staticServer')));
+
+
+const Sequelize = require('sequelize')
+
 const http = require('http')
 const util = require('util')
 const fs = require('./libs/fsExtra')
 const fileUpload = require('./libs/expressFileupload')
 const cookieParser = require('cookie-parser')
 const axios = require('axios')
+
+
+
 
 const { version } = require('../package.json')
 
@@ -43,6 +55,7 @@ const LibraryScanner = require('./scanner/LibraryScanner')
 const passport = require('passport')
 const expressSession = require('express-session')
 const MemoryStore = require('./libs/memorystore')
+const { join } = require('path')
 
 class Server {
   constructor(SOURCE, PORT, HOST, CONFIG_PATH, METADATA_PATH, ROUTER_BASE_PATH) {
@@ -221,7 +234,7 @@ class Server {
     this.initProcessEventListeners()
     await this.init()
 
-    const app = express()
+
 
     app.use((req, res, next) => {
       if (!global.ServerSettings.allowIframe) {
@@ -305,6 +318,17 @@ class Server {
         tempFileDir: Path.join(global.MetadataPath, 'tmp')
       })
     )
+
+    // //use multer to deal with the file
+    // const storage = multer.diskStorage({
+    //   destination: Path.join(__dirname, '../static'), // 确保这个目录存在
+    //   filename: (req, file, cb) => {
+    //     cb(null, Date.now() + '-' + file.originalname); // 避免重名
+    //   }
+    // });
+    //
+    // const upload = multer({ storage });
+
     router.use(express.urlencoded({ extended: true, limit: '5mb' }))
 
     // Skip JSON parsing for internal-api routes
@@ -316,6 +340,7 @@ class Server {
 
     // Static folder
     router.use(express.static(Path.join(global.appRoot, 'static')))
+    //onsole.log('Static path:', Path.join(global.appRoot, 'static'));
 
     // RSS Feed temp route
     router.get('/feed/:slug', (req, res) => {

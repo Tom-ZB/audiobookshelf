@@ -33,6 +33,7 @@ class MiscController {
    * @param {Response} res
    */
   async handleUpload(req, res) {
+    console.log("执行了")
     if (!req.user.canUpload) {
       Logger.warn(`User "${req.user.username}" attempted to upload without permission`)
       return res.sendStatus(403)

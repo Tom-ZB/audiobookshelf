@@ -2,8 +2,17 @@ const pkg = require('./package.json')
 
 const routerBasePath = process.env.ROUTER_BASE_PATH ?? '/audiobookshelf'
 const serverHostUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3333'
-const serverPaths = ['api/', 'public/', 'hls/', 'auth/', 'feed/', 'status', 'login', 'logout', 'init']
-const proxy = Object.fromEntries(serverPaths.map((path) => [`${routerBasePath}/${path}`, { target: process.env.NODE_ENV !== 'production' ? serverHostUrl : '/' }]))
+const serverPaths = ['static', 'api/', 'public/', 'hls/', 'auth/', 'feed/', 'status', 'login', 'logout', 'init', 'filesystem/']
+const proxy = Object.fromEntries(
+  serverPaths.map(
+    (path) => {
+      // if(path === 'static') {
+      //   return [`/${path}`, { target: serverHostUrl }];
+      // }
+      return [`${routerBasePath}/${path}`, { target: process.env.NODE_ENV !== 'production' ? serverHostUrl : '/' }]
+    }
+  )
+)
 
 module.exports = {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -27,7 +36,10 @@ module.exports = {
     htmlAttrs: {
       lang: 'en'
     },
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: '' }, { hid: 'robots', name: 'robots', content: 'noindex' }],
+    meta: [{ charset: 'utf-8' }, {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    }, { hid: 'description', name: 'description', content: '' }, { hid: 'robots', name: 'robots', content: 'noindex' }],
     script: [],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: routerBasePath + '/favicon.ico' },

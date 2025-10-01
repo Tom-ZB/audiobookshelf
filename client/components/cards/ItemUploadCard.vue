@@ -50,6 +50,8 @@
         </div>
       </div>
 
+      <div>vtt upload {{mediaType}}</div>
+
       <tables-uploaded-files-table :files="item.itemFiles" :title="$strings.HeaderItemFiles" class="mt-8" />
       <tables-uploaded-files-table v-if="item.otherFiles.length" :title="$strings.HeaderOtherFiles" :files="item.otherFiles" />
       <tables-uploaded-files-table v-if="item.ignoredFiles.length" :title="$strings.HeaderIgnoredFiles" :files="item.ignoredFiles" />

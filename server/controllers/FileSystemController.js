@@ -115,6 +115,8 @@ class FileSystemController {
 
     let filepath = Path.join(libraryFolder.path, directory)
     filepath = fileUtils.filePathToPOSIX(filepath)
+    console.log(filepath)  //D:/Trimester A/domentation for Java and web/Java/COMPX574ProjectStructureReport
+
 
     // Ensure filepath is inside library folder (prevents directory traversal)
     if (!filepath.startsWith(libraryFolder.path)) {

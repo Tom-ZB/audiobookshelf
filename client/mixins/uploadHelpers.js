@@ -238,7 +238,7 @@ export default {
           if (file.webkitRelativePath) file.filepath = file.webkitRelativePath
           else file.filepath = file.name
 
-          if (filetype === 'audio' || (filetype === 'ebook' && mediaType === 'book')) {
+          if (filetype === 'audio' || (filetype === 'ebook' && mediaType === 'book') || filetype === 'subtitle') {  //add new type for vtt
             var dir = file.filepath ? Path.dirname(file.filepath) : ''
             if (dir === '.') dir = ''
 

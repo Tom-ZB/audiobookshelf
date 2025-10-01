@@ -1,6 +1,8 @@
 const express = require('express')
 const Path = require('path')
 const sequelize = require('sequelize')
+//const multer = require('multer');
+const fileUpload = require('../libs/expressFileupload')
 
 const Logger = require('../Logger')
 const Database = require('../Database')
@@ -8,6 +10,18 @@ const SocketAuthority = require('../SocketAuthority')
 
 const fs = require('../libs/fsExtra')
 const date = require('../libs/dateAndTime')
+
+// //use multer to deal with the file
+// const storage = multer.diskStorage({
+//   destination: Path.join(__dirname, '../static'), // 确保这个目录存在
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + '-' + file.originalname); // 避免重名
+//   }
+// });
+//
+// const upload = multer({ storage });
+
+
 
 const CacheManager = require('../managers/CacheManager')
 const RssFeedManager = require('../managers/RssFeedManager')
@@ -205,6 +219,45 @@ class ApiRouter {
     //
     this.router.get('/filesystem', FileSystemController.getPaths.bind(this))
     this.router.post('/filesystem/pathexists', FileSystemController.checkPathExists.bind(this))
+
+    // add new router
+    this.router.post('/filesystem/upload-vtt', async (req, res) => {
+      console.log("performed")
+      try {
+        // 1) verify if get the file
+        if (!req.files || !req.files.vttFile) {
+          return res.status(400).json({ success: false, message: 'please choose vttFile' });
+        }
+
+        const file = req.files.vttFile;
+        // 2) target directory
+        const targetDir = Path.join(__dirname, '../staticServer');
+        await fs.ensureDir(targetDir);
+
+        const safeName = `${Date.now()}-${file.name || 'subtitle.vtt'}`;
+        const destPath = Path.join(targetDir, safeName);
+
+        if (file.tempFilePath) {
+          // from temporary file to static folder
+          await fs.move(file.tempFilePath, destPath, { overwrite: true });
+        } else {
+          const buf = file.buffer || file.data;
+          if (!buf) {
+            return res.status(400).json({ success: false, message: 'file is empty' });
+          }
+          await fs.writeFile(destPath, buf);
+        }
+
+        return res.json({
+          success: true,
+          path: `${req.protocol}://${req.get('host')}/staticServer/${safeName}`,
+          message: 'upload successfully'
+        });
+      } catch (err) {
+        console.error('VTT failed to upload:', err);
+        return res.status(500).json({ success: false, message: 'server error', error: err.message });
+      }
+    });
 
     //
     // Author Routes
